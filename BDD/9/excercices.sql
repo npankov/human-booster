@@ -72,3 +72,19 @@ FROM station
 JOIN societe ON societe.idSociete = station.idSociete
 GROUP BY societe.raisonSociale
 ORDER BY `Nombre de stations` DESC
+
+4.
+SELECT *
+FROM station
+WHERE station.longitude >= 1.7 AND station.latitude >= 46.6
+
+DELETE releve
+FROM releve
+JOIN station ON station.idStation = releve.idStation
+WHERE station.longitude >= -1.7 AND station.latitude >= 46.6;
+
+DELETE station
+FROM station
+WHERE station.longitude >= -1.7 AND station.latitude >= 46.6;
+
+5.
