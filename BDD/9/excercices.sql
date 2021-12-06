@@ -88,3 +88,46 @@ FROM station
 WHERE station.longitude >= -1.7 AND station.latitude >= 46.6;
 
 5.
+Fait
+
+6.
+SELECT *
+FROM explosion
+JOIN pays ON explosion.idPays = pays.idPays
+WHERE pays.idPays != explosion.idPays;
+
+7.
+SELECT *
+FROM explosion
+JOIN type ON type.idType = explosion.idType
+JOIN categorie ON categorie.idCategorie = explosion.idCategorie
+JOIN pays ON pays.idPays = explosion.idPays
+WHERE type.idType = 4 AND categorie.idCategorie = 1 AND pays.idPays = 3;
+
+8.
+SELECT site.designation AS `Désignation du site`,
+	CONCAT('[', site.latitude, ' ; ', site.longitude, ']') AS `Coordonnées géographiques`,
+    COUNT(*) AS `Nombre d'explotions`
+FROM explosion
+JOIN site ON site.idSite = explosion.idSite
+GROUP BY site.designation, `Coordonnées géographiques`;
+
+9.
+SELECT pays.nom AS `Nom du pays`,
+	COUNT(*) AS `Nombre d'explotions`,
+    MIN(explosion.dateDeclenchement) AS `Date de la première explosion`,
+    MAX(explosion.dateDeclenchement) AS `Date de la dernière explosion`
+FROM explosion
+JOIN pays ON pays.idPays = explosion.idPays
+GROUP BY pays.nom;
+
+10.
+SELECT pays.nom AS `Nom du pays`,
+	COUNT(*) AS `Nombre d'explotions`,
+    REPLACE(explosion.estFission, 1, 'Bombe à fission') AS `Technologie de bombe`,
+    explosion.puissanceEstimee AS `Puissance estimée`,
+    MAX(explosion.dateDeclenchement) AS `Date de fin de retombee`
+FROM explosion
+JOIN pays ON pays.idPays = explosion.idPays
+GROUP BY `Nom du pays`, `Technologie de bombe`, `Puissance estimée`
+
