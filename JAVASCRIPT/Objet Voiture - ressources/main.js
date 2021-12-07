@@ -18,5 +18,5 @@ const DIV = document.querySelector('#content');
 
 DIV.innerHTML += `<ul>Information sur la voiture</ul>`;
 for (let i of valuesVoiture) {
-    DIV.innerHTML += `<li>${i[0]}: ${i[1]}</li>`;
+    DIV.innerHTML += `<li>${i[0]} : ${i[1]}</li>`;
 }
