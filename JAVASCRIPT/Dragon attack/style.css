@@ -9,6 +9,11 @@ body {
   padding: 50px;
   color: white;
 }
+
+.bold {
+  font-weight: bold;
+}
+
 table {
   border-collapse: collapse;
   text-align: center;
@@ -31,4 +36,8 @@ article {
   align-items: center;
   max-width: 500px;
   border: 10px white outset;
+}
+
+article span {
+  margin: 10px;
 }
