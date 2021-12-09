@@ -1,3 +1,5 @@
+'use strict';
+
 const rectangle = document.querySelector('.rectangle');
 const button = document.querySelector('#toggle-rectangle');
 
@@ -10,8 +12,7 @@ function changeColor() {
 }
 
 function removeColor() {
-    rectangle.classList.remove('important');
-    rectangle.classList.remove('good');
+    rectangle.classList.remove('important', 'good');
 }
 
 function clickColorWhite() {
