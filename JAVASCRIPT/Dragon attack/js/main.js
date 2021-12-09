@@ -74,45 +74,53 @@ function initializeGame() {
 };
 
 function computeDragonDamagePoint() {
-    switch (game.difficulte) {
-        case 1:
-            game.hitDragon = getRandomInteger(10, 20);
-            break;
-        case 2:
-            game.hitDragon = getRandomInteger(20, 30);
-            break;
-        case 3:
-            game.hitDragon = getRandomInteger(20, 30);
-            break;
-        default:
-            break;
-    }
+    let damage;
+    if (game.difficulte === 1) {
+        damage = getRandomInteger(10, 20);
+    } else {
+        damage = getRandomInteger(20, 30);
+    } 
+    return Math.round(damage * game.armorRatio);
+    // switch (game.difficulte) {
+    //     case 1:
+    //         game.hitDragon = getRandomInteger(10, 20);
+    //         break;
+    //     case 2:
+    //         game.hitDragon = getRandomInteger(20, 30);
+    //         break;
+    //     case 3:
+    //         game.hitDragon = getRandomInteger(20, 30);
+    //         break;
+    //     default:
+    //         break;
+    // }
 
-    game.leftHPKnight = game.hpKnight - Math.round(game.hitDragon * game.armorRatio);
+    // game.leftHPKnight = game.hpKnight - Math.round(game.hitDragon * game.armorRatio);
     // game.dammageDragon = game.hpKnight - game.leftHPKnight;
-    game.hpKnight = game.leftHPKnight;
-    console.log(`Le dragon inflige ${game.leftHPKnight} points de dommage au chevalier`);
+    // game.hpKnight = game.leftHPKnight;
+    // console.log(`Le dragon inflige ${game.leftHPKnight} points de dommage au chevalier`);
 };
 
 function computePlayerDamagePoint() {
+    let damage;
     switch (game.difficulte) {
         case 1:
-            game.hitKnight = getRandomInteger(25, 30);
+            damage = getRandomInteger(25, 30);
             break;
         case 2:
-            game.hitKnight = getRandomInteger(15, 20);
+            damage = getRandomInteger(15, 20);
             break;
         case 3:
-            game.hitKnight = getRandomInteger(5, 10);
+            damage = getRandomInteger(5, 10);
             break;
         default:
             break;
     }
-
-    game.leftHPDragon = game.hpDragon - Math.round(game.hitKnight * game.swordRatio);
+    return Math.round(damage * game.swordRatio);
+    // game.leftHPDragon = game.hpDragon - Math.round(game.hitKnight * game.swordRatio);
     // game.dammageKnight = game.hpDragon - game.leftHPDragon;
-    game.hpDragon = game.leftHPDragon;
-    console.log(`Le dragon inflige ${game.leftHPDragon} points de dommage au dragon`);
+    // game.hpDragon = game.leftHPDragon;
+    // console.log(`Le dragon inflige ${game.leftHPDragon} points de dommage au dragon`);
 };
 
 function resultBattle() {
@@ -162,29 +170,35 @@ function renderNumberRound() {
     DIV.innerHTML += `<div class="bold">----- Tour n°${game.round} -----</div><br>`;
 }
 
-function renderDescriptionDragon() {
-    DIV.innerHTML += `<div>Le dragon est plus rapide  et vous brulé, il vous enleve ${game.dammageKnight} PV</div>`
+function renderDescriptionDragon(damage) {
+    DIV.innerHTML += `<div>Le dragon est plus rapide  et vous brulé, il vous enleve ${damage} PV</div><br>`
 }
 
-function renderDescriptionKnight() {
-    DIV.innerHTML += `<div>Vous etes plus rapide et frappez le dragon, vous lui enleve ${game.dammageDragon} PV</div>`
+function renderDescriptionKnight(damage) {
+    DIV.innerHTML += `<div>Vous etes plus rapide et frappez le dragon, vous lui enleve ${damage} PV</div><br>`
 }
 
 function gameLoop() {
-    let knightSpeed, dragonSpeed;
+    let knightSpeed, dragonSpeed, damage;
     renderTitle()
     renderTour();
     
-    while (game.hpDragon > 0 && game.hpKnight > 0) {    
+    while (game.hpDragon > 0 && game.hpKnight > 0) { 
+        renderNumberRound()
+           
         knightSpeed = Math.random();
         dragonSpeed = Math.random();
         if (knightSpeed > dragonSpeed) {
-            computePlayerDamagePoint();
+            damage = computePlayerDamagePoint();
+            game.hpDragon -= damage;
+            renderDescriptionKnight(damage);
         } else {
-            computeDragonDamagePoint();
+            damage = computeDragonDamagePoint();
+            game.hpKnight -= damage;
+            renderDescriptionDragon(damage);
         }
 
-        renderNumberRound()
+        
         renderTour();
         game.round += 1;
     }
