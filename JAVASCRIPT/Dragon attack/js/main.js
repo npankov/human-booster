@@ -185,7 +185,7 @@ function gameLoop() {
     
     while (game.hpDragon > 0 && game.hpKnight > 0) { 
         renderNumberRound()
-           
+
         knightSpeed = Math.random();
         dragonSpeed = Math.random();
         if (knightSpeed > dragonSpeed) {
@@ -197,8 +197,6 @@ function gameLoop() {
             game.hpKnight -= damage;
             renderDescriptionDragon(damage);
         }
-
-        
         renderTour();
         game.round += 1;
     }
