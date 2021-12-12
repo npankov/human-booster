@@ -3,9 +3,9 @@
 const DIV = document.querySelector('#content');
 const buttons = document.querySelectorAll('button:not(#export)');
 const buttonExport = document.querySelector('#export');
+const popUp = document.querySelector('#popup');
 
 function generateHtml() {
-    console.log(buttons)
     switch (this.id) {
         case 'h1':
             DIV.innerHTML += '<h1 contenteditable="true">Saisir le titre principale</h1>';
@@ -37,8 +37,11 @@ function generateHtml() {
 };
 
 function exportHTML() {
-    console.log(DIV.innerHTML)
+    const divPopUp = document.createElement('div');
+    popUp.classList.toggle('hide');
+    divPopUp.textContent = DIV.innerHTML;
+    popUp.append(divPopUp);
 };
 
 buttons.forEach((button) => button.addEventListener('click', generateHtml));
-buttonExport.addEventListener('click', exportHTML)
+buttonExport.addEventListener('click', exportHTML);
