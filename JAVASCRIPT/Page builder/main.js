@@ -6,33 +6,12 @@ const buttonExport = document.querySelector('#export');
 const popUp = document.querySelector('#popup');
 
 function generateHtml() {
-    switch (this.id) {
-        case 'h1':
-            DIV.innerHTML += '<h1 contenteditable="true">Saisir le titre principale</h1>';
-            break;
+    const id = this.id;
 
-        case 'h1':
-            DIV.innerHTML += '<h1 contenteditable="true">Saisir le titre principale</h1>';
-            break;
-            
-        case 'h2':
-            DIV.innerHTML += '<h2 contenteditable="true">Saisir le titre niveaux 2</h2>';
-            break;
-
-        case 'h3':
-            DIV.innerHTML += '<h3 contenteditable="true">Saisir le titre niveaux 3</h3>';
-            break;
-
-        case 'p':
-            DIV.innerHTML += '<p contenteditable="true">Saisir le paragraph de text</p>';
-            break;
-
-        case 'hr':
-            DIV.innerHTML += '<hr>';
-            break;
-    
-        default:
-            break;
+    if (id === 'hr') {
+        DIV.innerHTML += '<hr>';
+    } else {
+        DIV.innerHTML += `<${id} contenteditable="true">Saisir le titre principale</${id}>`
     }
 };
 
