@@ -7,16 +7,20 @@ function addProduct(product) {
 }
 
 function findAndRemoveProduct(product) {
-  product = inputToDelete.value;
-  let index = listProducts.indexOf(product);
+    let index = listProducts.indexOf(product);
+    if (index != -1) {
+      listProducts.splice(index, 1);
+      return true;
+    } else {
+      alert("Ce produit ne figure pas dans la liste !");
+      return false;
+    }
+}
 
-  if (index != -1) {
-    listProducts.splice(index, 1);
-  } else {
-    alert("Ce product ne figure pas dans la liste");
-  }
-  displayList();
-  hidePopUp();
+function deleteOne(item) {
+    if (findAndRemoveProduct(item)) {
+        togglePopUp();
+    }
 }
 
 function deleteAllProducts() {
@@ -32,14 +36,14 @@ function displayList() {
   ).innerHTML = `Il y a ${listProducts.length} elements`;
 }
 
-function getValue() {
-  const item = document.querySelector("#toAdd").value;
-  addProduct(item);
+function getValue(selector, fnCallback) {
+  const item = document.querySelector(selector).value;
+  fnCallback(item);
   displayList();
 }
 
-function hidePopUp() {
-  popUp.classList.add("hide");
+function togglePopUp() {
+  popUp.classList.toggle("hide");
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -49,14 +53,17 @@ document.addEventListener("DOMContentLoaded", function () {
   popUp = document.querySelector("#popup");
   listElements = document.querySelector(".list");
 
-  btnDelete.addEventListener("click", findAndRemoveProduct);
-
-  document.querySelector("#deleteOne").addEventListener("click", function () {
-    popUp.classList.remove("hide");
+  document.querySelector("#submit").addEventListener("click", function() {
+      getValue('#toAdd', addProduct);
   });
 
-  document.querySelector("span").addEventListener("click", hidePopUp);
+  document.querySelector("#deleteOne").addEventListener("click", togglePopUp);
+
+  btnDelete.addEventListener("click", function () {
+    getValue("#toDelete", deleteOne)
+  });
+
+  document.querySelector("span").addEventListener("click", togglePopUp);
 
   btnDeleteAllProducts.addEventListener("click", deleteAllProducts);
-  document.querySelector("#submit").addEventListener("click", getValue);
 });
