@@ -2,7 +2,7 @@
 
 let state = {
     index: 0,
-    play: ''
+    play: false
 };
 
 const photos = [
@@ -75,7 +75,7 @@ function play() {
 
 function stopPlay() {
     clearInterval(state.play);
-    state.play = null;
+    state.play = false;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -92,12 +92,12 @@ document.addEventListener('DOMContentLoaded', function() {
             stopPlay();
             document.querySelector('#slider-toggle i').classList.remove('fa-pause');
             document.querySelector('#slider-toggle i').classList.add('fa-play');
-            document.querySelector('#slider-toggle').title = 'Démarrer le carrousel';
+            this.title = 'Démarrer le carrousel';
         } else {
             play();
             document.querySelector('#slider-toggle i').classList.remove('fa-play');
             document.querySelector('#slider-toggle i').classList.add('fa-pause');
-            document.querySelector('#slider-toggle').title = 'Arrêter le carrousel';
+            this.title = 'Arrêter le carrousel';
         }
     })
 })
