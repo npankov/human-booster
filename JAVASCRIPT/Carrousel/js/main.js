@@ -60,8 +60,7 @@ function prevPhoto() {
 }
 
 function randomPhoto() {
-    const newIndex = Math.floor(Math.random() * (photos.length));
-    console.log(state.index, newIndex);
+    const newIndex = getRandomInteger();
     if (newIndex != state.index) {
         state.index = newIndex;
     } else {
@@ -77,7 +76,6 @@ function play() {
 function stopPlay() {
     clearInterval(state.play);
     state.play = null;
-
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -89,11 +87,17 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#slider-previous').addEventListener('click', prevPhoto);
     document.querySelector('#slider-random').addEventListener('click', randomPhoto);
     document.querySelector('#slider-toggle').addEventListener('click', function() {
+
         if (state.play) {
             stopPlay();
+            document.querySelector('#slider-toggle i').classList.remove('fa-pause');
+            document.querySelector('#slider-toggle i').classList.add('fa-play');
+            document.querySelector('#slider-toggle').title = 'Démarrer le carrousel';
         } else {
             play();
+            document.querySelector('#slider-toggle i').classList.remove('fa-play');
+            document.querySelector('#slider-toggle i').classList.add('fa-pause');
+            document.querySelector('#slider-toggle').title = 'Arrêter le carrousel';
         }
-        
-    });
+    })
 })
