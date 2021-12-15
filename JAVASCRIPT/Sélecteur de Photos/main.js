@@ -1,35 +1,35 @@
-const liElements = document.querySelectorAll('li');
-const selectAll = document.querySelector('#selectAll');
-const deselectAll = document.querySelector('#deselectAll');
-const DIV = document.querySelector('#total em');
+const liElements = $('li');
+const selectAll = $('#selectAll');
+const deselectAll = $('#deselectAll');
+const DIV = $('#total em');
 
 function hoverClick() {
-    this.classList.toggle('selected');
-    counterPhotos()
+    $(this).toggleClass('selected');
+    counterPhotos();
 }
 
 function selectAllPhotos() {
-    liElements.forEach((li) => li.classList.add('selected'));
-    counterPhotos()
+    liElements.addClass('selected');
+    counterPhotos();
 }
 
 function deselectAllPhotos() {
-    liElements.forEach((li) => li.classList.remove('selected'));
-    counterPhotos()
+    liElements.removeClass('selected');
+    counterPhotos();
 }
 
 function counterPhotos() {
-   const numberPhotos = document.querySelectorAll('.selected');
+   const numberPhotos = $('.selected');
    if (numberPhotos.length === 0) {
-       DIV.style.color = 'red';
+       DIV.css('color', 'red');
    } else {
-       DIV.style.color = 'yellow';
+       DIV.css('color', 'yellow');
    }
-   DIV.textContent = numberPhotos.length;
+   DIV.text(numberPhotos.length);
 }
 
-liElements.forEach((li) => li.addEventListener('click', hoverClick));
-selectAll.addEventListener('click', selectAllPhotos);
-deselectAll.addEventListener('click', deselectAllPhotos);
+liElements.on('click', hoverClick);
+selectAll.on('click', selectAllPhotos);
+deselectAll.on('click', deselectAllPhotos);
 
 
