@@ -1,58 +1,50 @@
 'use strict';
 
-let btn, div;
-
-function ajaxCallHtml(path) {
+function ajaxCall(path, fnCallback, type = 'text') {
     fetch(path)
-    .then((response) => response.text())
-    .then((data) => div.innerHTML = data)
+    .then((response) => (type == 'text' ? response.text() : response.json()))
+    .then((data) => fnCallback(data))
     .catch((error) => alert("Erreur : " + error));
 }
 
-function ajaxCallJson(path) {
-    fetch(path)
-    .then((response) => response.json())
-    .then((data) => {
-        let html = '<ul>'
-        data.forEach((el) => (html += `<li><b>Prenom</b> : ${el.firstName}</li> <br> <li><i>Telephone : ${el.phone}</i></li><br>`));
-        html += '</ul>';
-        div.innerHTML = html;
-    })
-    .catch((error) => alert("Erreur : " + error));
+function insertHTML(html) {
+    document.querySelector('#target').innerHTML = html;
 }
 
-function ajaxCallJsonHtml(path) {
-    fetch(path)
-    .then((response) => response.json())
-    .then((data) => {
-        let html = '<ul class="movie-list">';
-        data.forEach((el) => (html += `<li><img src="images/${el.cover}"><p>
-        <strong>${el.title}</strong> -
-        <em>${el.duration}</em>
-        </p></li>`));
-        html += '</ul>';
-        div.innerHTML = html;
-    })
-    .catch((error) => alert("Erreur : " + error));
+function contactsRender(data) {
+    let html = '<ul>'
+    data.forEach((el) => (html += `<li><b>Prenom</b> : ${el.firstName}</li> <br> <li><i>Telephone : ${el.phone}</i></li><br>`));
+    html += '</ul>';
+    insertHTML(html);
+}
+
+function movieRender(data) {
+    let html = '<ul class="movie-list">';
+    data.forEach((el) => (html += `<li><img src="images/${el.cover}"><p>
+    <strong>${el.title}</strong> -
+    <em>${el.duration}</em>
+    </p></li>`));
+    html += '</ul>';
+    insertHTML(html);
 }
 
 function getValue() {
     let choice = document.querySelector('input[name="what"]:checked').value;
     switch (choice) {
         case '1':
-            ajaxCallHtml('http://127.0.0.1:5500/Ajax/data/1-get-html-article.html');
+            ajaxCall('http://127.0.0.1:5500/Ajax/data/1-get-html-article.html', insertHTML);
             break;
 
         case '2':
-            ajaxCallJson('http://127.0.0.1:5500/Ajax/data/2-get-contacts-list.json');
+            ajaxCall('http://127.0.0.1:5500/Ajax/data/2-get-contacts-list.json', contactsRender, 'json');
             break;
 
         case '3':
-            ajaxCallHtml('http://127.0.0.1:5500/Ajax/data/3-get-html-movies.html');
+            ajaxCall('http://127.0.0.1:5500/Ajax/data/3-get-html-movies.html', insertHTML);
             break;
 
         case '4':
-            ajaxCallJsonHtml('http://127.0.0.1:5500/Ajax/data/4-get-json-movies.json');
+            ajaxCall('http://127.0.0.1:5500/Ajax/data/4-get-json-movies.json', movieRender, 'json');
             break;
     
         default:
@@ -61,7 +53,5 @@ function getValue() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    btn = document.querySelector('#run');
-    div = document.querySelector('#target');
-    btn.addEventListener('click', getValue);
+    document.querySelector('#run').addEventListener('click', getValue);
 })
