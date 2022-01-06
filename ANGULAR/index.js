@@ -1,13 +1,16 @@
-const inputA = document.querySelector('#input1');
-const inputB = document.querySelector('#input2');
-const button = document.querySelector('button');
+const numberA = document.querySelector('#input1').valueAsNumber;
+const numberB = document.querySelector('#input2').valueAsNumber;
+const button = document.querySelector('#input3');
+const form = document.querySelector('form');
 const div = document.querySelector('#content');
 
-function calculate() {
-  return Number(inputA.value) + Number(inputB.value);
+function calculate(numberA, numberB) {
+  return numberA + numberB;
 }
 
-button.addEventListener('click', () => {
-    div.innerHTML += `<div>Le résultat est ${calculate()} </div>`;
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const result = calculate(numberA, numberB);
+  console.log(result);
+  div.innerHTML += `<div>Le résultat est ${result} </div>`;
 });
-
