@@ -2,9 +2,9 @@ type Student = {
   name: string,
   lastName: string,
   age: number
-}[];
+};
 
-let students: Student = [
+let students: Student[] = [
   {
     name: 'Nikolai',
     lastName: 'Pankov',
