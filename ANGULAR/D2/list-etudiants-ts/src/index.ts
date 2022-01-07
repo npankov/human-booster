@@ -1,7 +1,19 @@
 import { students, Student } from './students.js';
 
-students.map((student) => {
-  const div = (document.querySelector('#content') as HTMLDivElement);
-  div.innerHTML += `<div><strong>Name:</strong> ${student.name} <strong>Last Name:</strong> ${student.lastName} <strong>Age:</strong> ${student.age}</div>`
-  div.innerHTML += `<button>Delete</button>`;
+students.map((student, id) => {
+  const content = (document.querySelector('#content') as HTMLDivElement);
+  content.innerHTML += `<div id='${id}'><strong>Name:</strong> ${student.name} <strong>Last Name:</strong> ${student.lastName} <strong>Age:</strong> ${student.age} <button>Delete</button></div>`
+  console.log(student, id);
+
+  const buttons = document.querySelectorAll('button');
+
+  const div = document.getElementById(`${id}`) as HTMLDivElement;
+  console.log(div)
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      div.remove();
+    })
+  })
 })
+
