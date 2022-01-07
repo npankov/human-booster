@@ -1,15 +1,30 @@
 import { students } from './students.js';
-students.map((student, id) => {
+function renderStudent(student, students) {
     const content = document.querySelector('#content');
-    content.innerHTML += `<div id='${id}'><strong>Name:</strong> ${student.name} <strong>Last Name:</strong> ${student.lastName} <strong>Age:</strong> ${student.age} <button>Delete</button></div>`;
-    console.log(student, id);
-    const buttons = document.querySelectorAll('button');
-    const div = document.getElementById(`${id}`);
-    console.log(div);
-    buttons.forEach((button) => {
-        button.addEventListener('click', () => {
-            div.remove();
-        });
+    const divStudent = document.createElement('div');
+    divStudent.innerHTML = `
+    <strong>Name:</strong> ${student.name}
+    <strong>Last Name:</strong> ${student.lastName}
+    <strong>Age:</strong> ${student.age}
+    <button>Delete</button>
+  `;
+    const button = divStudent.querySelector('button');
+    button === null || button === void 0 ? void 0 : button.addEventListener('click', () => {
+        deleteStudent(student, divStudent, students);
     });
-});
+    content.append(divStudent);
+}
+function renderAllStudents(students) {
+    for (let student of students) {
+        renderStudent(student, students);
+    }
+}
+function deleteStudent(student, divStudent, students) {
+    divStudent.remove();
+    const positionStudent = students.indexOf(student);
+    if (positionStudent != -1) {
+        students.splice(positionStudent, 1);
+    }
+}
+renderAllStudents(students);
 //# sourceMappingURL=index.js.map

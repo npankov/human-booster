@@ -1,19 +1,39 @@
 import { students, Student } from './students.js';
 
-students.map((student, id) => {
+function renderStudent(student: Student, students: Student[]) {
   const content = (document.querySelector('#content') as HTMLDivElement);
-  content.innerHTML += `<div id='${id}'><strong>Name:</strong> ${student.name} <strong>Last Name:</strong> ${student.lastName} <strong>Age:</strong> ${student.age} <button>Delete</button></div>`
-  console.log(student, id);
+  const divStudent = document.createElement('div');
 
-  const buttons = document.querySelectorAll('button');
+  divStudent.innerHTML = `
+    <strong>Name:</strong> ${student.name}
+    <strong>Last Name:</strong> ${student.lastName}
+    <strong>Age:</strong> ${student.age}
+    <button>Delete</button>
+  `;
 
-  const div = document.getElementById(`${id}`) as HTMLDivElement;
-  console.log(div)
+  const button = divStudent.querySelector('button');
 
-  buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-      div.remove();
-    })
+  button?.addEventListener('click', () => {
+    deleteStudent(student, divStudent, students);
   })
-})
+  content.append(divStudent);
+}
 
+function renderAllStudents(students: Student[]) {
+  for (let student of students) {
+    renderStudent(student, students)
+  }
+ 
+}
+
+function deleteStudent(student: Student, divStudent: HTMLDivElement, students: Student[]) {
+  divStudent.remove();
+
+  const positionStudent = students.indexOf(student);
+  if (positionStudent != -1) {
+    students.splice(positionStudent, 1)
+  }
+}
+
+
+renderAllStudents(students)
