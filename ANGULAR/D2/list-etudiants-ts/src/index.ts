@@ -3,7 +3,6 @@ import { students, Student } from './students.js';
 function renderStudent(student: Student, students: Student[]) {
   const content = (document.querySelector('#content') as HTMLDivElement);
   const divStudent = document.createElement('div');
-  const button = divStudent.querySelector('button');
 
   divStudent.innerHTML = `
     <strong>Name:</strong> ${student.name}
@@ -11,6 +10,8 @@ function renderStudent(student: Student, students: Student[]) {
     <strong>Age:</strong> ${student.age}
     <button>Delete</button>
   `;
+
+  const button = divStudent.querySelector('button');
 
   button?.addEventListener('click', () => {
     deleteStudent(student, divStudent, students);
