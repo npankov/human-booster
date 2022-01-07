@@ -17,10 +17,13 @@ function renderStudent(student, students) {
 }
 function renderAllStudents(students) {
     const content = document.querySelector('#content');
-    const divAverageAge = document.createElement('div');
     for (let student of students) {
         renderStudent(student, students);
     }
+}
+const divAverageAge = document.createElement('div');
+function renderAverageAge(students) {
+    const content = document.querySelector('#content');
     divAverageAge.innerHTML = `
     <strong>Average Age:</strong> ${averageAge(students)}
   `;
@@ -32,9 +35,11 @@ function deleteStudent(student, divStudent, students) {
     if (positionStudent != -1) {
         students.splice(positionStudent, 1);
     }
+    renderAverageAge(students);
 }
 function averageAge(students) {
     return students.reduce((acc, student) => acc + student.age, 0) / students.length;
 }
 renderAllStudents(students);
+renderAverageAge(students);
 //# sourceMappingURL=index.js.map

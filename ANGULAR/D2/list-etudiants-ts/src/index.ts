@@ -22,17 +22,21 @@ function renderStudent(student: Student, students: Student[]) {
 
 function renderAllStudents(students: Student[]) {
   const content = (document.querySelector('#content') as HTMLDivElement);
-  const divAverageAge = document.createElement('div');
 
   for (let student of students) {
     renderStudent(student, students)
   }
+}
+
+const divAverageAge = document.createElement('div');
+
+function renderAverageAge(students: Student[]) {
+  const content = (document.querySelector('#content') as HTMLDivElement);
 
   divAverageAge.innerHTML = `
     <strong>Average Age:</strong> ${averageAge(students)}
   `;
-  
-  content.append(divAverageAge);
+  content.append(divAverageAge);  
 }
 
 function deleteStudent(student: Student, divStudent: HTMLDivElement, students: Student[]) {
@@ -42,10 +46,12 @@ function deleteStudent(student: Student, divStudent: HTMLDivElement, students: S
   if (positionStudent != -1) {
     students.splice(positionStudent, 1)
   }
+  renderAverageAge(students);
 }
 
 function averageAge(students: Student[]) {
   return students.reduce((acc, student) => acc + student.age, 0) / students.length;
 }
 
-renderAllStudents(students)
+renderAllStudents(students);
+renderAverageAge(students);
