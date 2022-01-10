@@ -13,7 +13,6 @@ function renderStudent(student, students) {
         deleteStudent(student, divStudent, students);
     });
     content.append(divStudent);
-    console.log(averageAge(students));
 }
 function renderAllStudents(students) {
     const content = document.querySelector('#content');
@@ -38,8 +37,26 @@ function deleteStudent(student, divStudent, students) {
     renderAverageAge(students);
 }
 function averageAge(students) {
-    return students.reduce((acc, student) => acc + student.age, 0) / students.length;
+    return (students.reduce((acc, student) => acc + student.age, 0) / students.length);
 }
-renderAllStudents(students);
+function addStudent() {
+    const name = document.querySelector('#name').value;
+    const lastName = document.querySelector('#lastName').value;
+    const age = document.querySelector('#age').valueAsNumber;
+    let newStudent = {
+        name: name,
+        lastName: lastName,
+        age: age,
+    };
+    students.push(newStudent);
+    renderStudent(newStudent, students);
+}
+const form = document.querySelector('form');
+form === null || form === void 0 ? void 0 : form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    addStudent();
+    console.log(students);
+});
 renderAverageAge(students);
+renderAllStudents(students);
 //# sourceMappingURL=index.js.map
