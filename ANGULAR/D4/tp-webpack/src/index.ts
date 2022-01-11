@@ -10,5 +10,5 @@ form?.addEventListener('submit', (e) => {
     .then((response) => {
       return response.json()
     })
-    .then((data) => data.map((el: any) => result.innerHTML = el.nom));
+    .then((data) => data.map((el: any) => result.innerHTML = `Ville: ${el.nom} / Code region: ${el.codeRegion} / Population: ${el.population} personnes`));
 })
