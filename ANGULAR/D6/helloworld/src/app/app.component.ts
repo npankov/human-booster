@@ -9,10 +9,14 @@ import { Student } from './models/student';
 
 export class AppComponent {
   title = 'helloworld';
-
-  student: Student
+  people: Student[] = [
+    new Student('Jean', 'Dupont', 33),
+    new Student('Thomas', 'Dumont', 56, 'Citizen'),
+    new Student('Lukas', 'Skywoker', 29, 'Citizen')
+  ];
 
   constructor() {
-    this.student = new Student('Jean', 'Dupont', 33, 'No citizen')
   }
+
+
 }

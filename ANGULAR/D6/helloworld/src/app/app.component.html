@@ -1,8 +1,3 @@
-<div>
-  <p>Prenom : {{ student.prenom }}</p>
-  <p>Nom : {{ student.nom }}</p>
-  <p>Age : {{ student.age }}</p>
-  <p>{{ student.citizen }}</p>
-</div>
-
+<h1>Students</h1>
+<app-student *ngFor="let student of people" [student]="student"></app-student>
 <router-outlet></router-outlet>
