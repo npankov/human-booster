@@ -5,10 +5,12 @@
       <br>
       Prenom: {{ student.lastName }}
       <br>
-      Age: {{ student.age }}
+      Age: <span *ngIf="student.age > 18;else other_content">
+             <span style="color:blue">{{ student.age }}</span>
+           </span>
+           <ng-template #other_content><span style="color:red">{{ student.age }}</span></ng-template>
       <br>
       {{ student.citizen }}
     </p>
   </li>
 </div>
-

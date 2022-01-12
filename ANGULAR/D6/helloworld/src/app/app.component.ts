@@ -12,7 +12,8 @@ export class AppComponent {
   people: Student[] = [
     new Student('Jean', 'Dupont', 33),
     new Student('Thomas', 'Dumont', 56, 'Citizen'),
-    new Student('Lukas', 'Skywoker', 29, 'Citizen')
+    new Student('Lukas', 'Skywoker', 29, 'Citizen'),
+    new Student('Taro', 'Willy', 17, 'No citizen')
   ];
 
   constructor() {
