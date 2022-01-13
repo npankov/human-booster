@@ -4,3 +4,10 @@ li {
   background: #f0f0f0;
 }
 
+.adult {
+  color: blue;
+}
+
+.minor {
+  color: red;
+}
