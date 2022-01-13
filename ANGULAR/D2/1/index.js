@@ -1,6 +1,6 @@
 const numberA = document.querySelector('#input1').valueAsNumber;
 const numberB = document.querySelector('#input2').valueAsNumber;
-const form = document.querySelector('form');
+const form = document.querySelector('1');
 const div = document.querySelector('#content');
 
 function calculate(numberA, numberB) {

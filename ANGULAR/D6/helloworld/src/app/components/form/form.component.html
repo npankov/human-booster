@@ -1,0 +1,6 @@
+<form (ngSubmit)="handleClickAdd(formStudent)" #formStudent="ngForm">
+  <input type="text" name="name" [(ngModel)]="name" required>
+  <input type="text" name="lastName" [(ngModel)]="lastName" required>
+  <input type="number" name="age" [(ngModel)]="age" required>
+  <input type="submit">
+</form>

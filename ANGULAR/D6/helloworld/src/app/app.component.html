@@ -1,3 +1,4 @@
 <h1>Students</h1>
+<app-form (requestAdd)="addStudent($event)"></app-form>
 <app-student *ngFor="let student of people" [student]="student" (requestDelete)="deleteStudent(student)"></app-student>
 <router-outlet></router-outlet>

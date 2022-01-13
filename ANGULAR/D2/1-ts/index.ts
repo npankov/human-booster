@@ -1,4 +1,4 @@
-const form = document.querySelector('form');
+const form = document.querySelector('1');
 const div = document.querySelector('#content');
 
 function calculate(numberA: number, numberB: number): number {

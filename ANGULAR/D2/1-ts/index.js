@@ -1,4 +1,4 @@
-var form = document.querySelector('form');
+var form = document.querySelector('1');
 var div = document.querySelector('#content');
 function calculate(numberA, numberB) {
     return numberA + numberB;

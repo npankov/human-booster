@@ -17,7 +17,7 @@ export class StudentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  handleClick() {
+  handleClickDelete() {
     this.requestDelete.emit();
   }
 

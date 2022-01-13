@@ -1,6 +1,6 @@
 import { getLink } from "./demoFunction";
 
-const form = document.querySelector('form');
+const form = document.querySelector('1');
 const result = document.querySelector('#result') as HTMLParagraphElement;
 
 form?.addEventListener('submit', (e) => {
