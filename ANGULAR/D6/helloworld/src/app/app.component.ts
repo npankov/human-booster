@@ -19,5 +19,13 @@ export class AppComponent {
   constructor() {
   }
 
+  deleteStudent(student: Student) {
+    console.log('delete ' + student.name)
+    const positionStudent = this.people.indexOf(student);
+
+    if (positionStudent !== -1) {
+      this.people.splice(positionStudent, 1)
+    }
+  }
 
 }

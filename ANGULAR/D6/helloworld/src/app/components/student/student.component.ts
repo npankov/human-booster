@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Student } from '../../models/student';
 
 @Component({
@@ -8,10 +8,17 @@ import { Student } from '../../models/student';
 })
 export class StudentComponent implements OnInit {
   @Input() student!: Student;
+  @Output() requestDelete: EventEmitter<any>;
 
-  constructor() { }
+  constructor() {
+    this.requestDelete = new EventEmitter();
+  }
 
   ngOnInit(): void {
+  }
+
+  handleClick() {
+    this.requestDelete.emit();
   }
 
 }
