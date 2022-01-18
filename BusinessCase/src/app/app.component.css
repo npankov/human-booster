@@ -42,7 +42,7 @@
   max-height: 35px;
 }
 
-::placeholder {
+.form-control[value], .bi-search {
   font-style: italic;
   color: rgba(0, 0, 0, 0.2);
 }
