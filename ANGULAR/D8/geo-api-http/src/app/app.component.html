@@ -1,7 +1,7 @@
-<div class="container center-block">
-  <button class="btn btn-primary" (click)="requestData()">Get regions</button>
-  <div *ngFor="let region of regions">
-    <p>Nom de region: {{ region.nom }}. Code de region: {{ region.code }}</p>
+<div class="container-fluid pt-2">
+  <div class="row">
+    <app-region class="col-md-2 mb-2" *ngFor="let region of listRegions" [region]="region"></app-region>
   </div>
 </div>
+
 <router-outlet></router-outlet>

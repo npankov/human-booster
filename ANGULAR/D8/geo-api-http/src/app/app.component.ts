@@ -10,17 +10,12 @@ import { Region } from './models/types';
 })
 export class AppComponent {
   title = 'geo-api-http';
-  http: HttpClient;
-  regions!: Region[];
+  public listRegions: Region[] = [];
 
-  constructor(http: HttpClient) {
-    this.http = http;
-  }
-
-  requestData() {
-    let link = "https://geo.api.gouv.fr/regions";
+  constructor(private http: HttpClient) {
+    let link = 'https://geo.api.gouv.fr/regions';
     lastValueFrom(this.http.get<Region[]>(link))
-      .then((data) => this.regions = data);
+      .then((data) => this.listRegions.push(...data))
   }
 
 }

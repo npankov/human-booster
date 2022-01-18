@@ -9,7 +9,7 @@ import { lastValueFrom } from 'rxjs';
   styleUrls: ['./region.component.css']
 })
 export class RegionComponent implements OnInit {
-  @Input() region!: Region;
+  @Input() public region!: Region;
 
   constructor() { }
 
