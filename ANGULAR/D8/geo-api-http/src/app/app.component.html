@@ -1,3 +1,7 @@
-
-<app-region></app-region>
+<div class="container center-block">
+  <button class="btn btn-primary" (click)="requestData()">Get regions</button>
+  <div *ngFor="let region of regions">
+    <p>Nom de region: {{ region.nom }}. Code de region: {{ region.code }}</p>
+  </div>
+</div>
 <router-outlet></router-outlet>

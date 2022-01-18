@@ -1,4 +1,4 @@
 export type Region = {
-  name: string,
+  nom: string,
   code: number
 }

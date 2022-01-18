@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { lastValueFrom } from 'rxjs';
+import { Region } from './models/types';
 
 @Component({
   selector: 'app-root',
@@ -8,15 +10,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'geo-api-http';
-  // http: HttpClient;
+  http: HttpClient;
+  regions!: Region[];
 
-  constructor() {
-    // this.http = http;
+  constructor(http: HttpClient) {
+    this.http = http;
   }
 
-  // requestData() {
-  //   let link = "https://geo.api.gouv.fr/regions";
-  //   console.log(this.http.get(link))
-  // }
+  requestData() {
+    let link = "https://geo.api.gouv.fr/regions";
+    lastValueFrom(this.http.get<Region[]>(link))
+      .then((data) => this.regions = data);
+  }
 
 }

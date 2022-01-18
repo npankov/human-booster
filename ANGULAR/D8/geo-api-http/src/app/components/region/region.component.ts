@@ -10,21 +10,10 @@ import { lastValueFrom } from 'rxjs';
 })
 export class RegionComponent implements OnInit {
   @Input() region!: Region;
-  private http: HttpClient;
 
-
-  constructor(http: HttpClient) {
-    this.http = http;
-  }
+  constructor() { }
 
   ngOnInit(): void {
-  }
-
-  requestData() {
-    let link = "https://geo.api.gouv.fr/regions";
-    console.log(this.http.get(link))
-    lastValueFrom(this.http.get("https://geo.api.gouv.fr/regions"))
-      .then(donnees => console.log(donnees));
   }
 
 }
