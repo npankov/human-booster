@@ -3,7 +3,10 @@
     {{ region.nom }}
   </div>
   <div class="card-body">
-    <p class="card-text">Code associé a la region: {{ region.code }}</p>
-<!--    <a href="#" class="btn btn-primary">Charger les departaments</a>-->
+    <p class="card-text">Code associé a la region : {{ region.code }}</p>
+    <button class="btn btn-primary" (click)="chargerDepartements()">Charger les départements</button>
+
+    <p class="mt-1" *ngIf="region.listDepartements">Départements associés : </p>
+    <app-departement *ngFor="let departement of region.listDepartements" [departement]="departement"></app-departement>
   </div>
 </div>

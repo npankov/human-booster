@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
-import { Region } from './models/types';
+import { RegionAPI, Region, Departement } from './models/types';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +13,8 @@ export class AppComponent {
   public listRegions: Region[] = [];
 
   constructor(private http: HttpClient) {
-    let link = 'https://geo.api.gouv.fr/regions';
-    lastValueFrom(this.http.get<Region[]>(link))
+    const link = 'https://geo.api.gouv.fr/regions';
+    lastValueFrom(this.http.get<RegionAPI[]>(link))
       .then((data) => this.listRegions.push(...data))
   }
 
