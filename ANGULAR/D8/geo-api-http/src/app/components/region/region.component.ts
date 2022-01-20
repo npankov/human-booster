@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Region } from '../../models/types';
+import { DepartementAPI, Region } from '../../models/types';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 
@@ -9,22 +9,17 @@ import { lastValueFrom } from 'rxjs';
   styleUrls: ['./region.component.css']
 })
 export class RegionComponent implements OnInit {
-  @Input() region!: Region;
-  private http: HttpClient;
+  @Input() public region!: Region;
 
-
-  constructor(http: HttpClient) {
-    this.http = http;
-  }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
 
-  requestData() {
-    let link = "https://geo.api.gouv.fr/regions";
-    console.log(this.http.get(link))
-    lastValueFrom(this.http.get("https://geo.api.gouv.fr/regions"))
-      .then(donnees => console.log(donnees));
+  chargerDepartements() {
+    const link = 'https://geo.api.gouv.fr/departements?codeRegion=';
+    lastValueFrom(this.http.get<DepartementAPI[]>(link + this.region.code))
+      .then((data) => this.region.listDepartements = data)
   }
 
 }

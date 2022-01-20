@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { RegionComponent } from './components/region/region.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { DepartementComponent } from './components/departement/departement.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegionComponent
+    RegionComponent,
+    DepartementComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,7 @@
+<div class="container-fluid pt-2">
+  <div class="row">
+    <app-region class="col-md-2 mb-2" *ngFor="let region of listRegions" [region]="region"></app-region>
+  </div>
+</div>
 
-<app-region></app-region>
 <router-outlet></router-outlet>

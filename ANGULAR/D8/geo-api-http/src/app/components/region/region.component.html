@@ -1,3 +1,12 @@
-<div class="container center-block">
-  <button type="button" class="btn btn-primary" (click)="requestData()">Get</button>
+<div class="card">
+  <div class="card-header">
+    {{ region.nom }}
+  </div>
+  <div class="card-body">
+    <p class="card-text">Code associé a la region : {{ region.code }}</p>
+    <button class="btn btn-primary" (click)="chargerDepartements()">Charger les départements</button>
+
+    <p class="mt-1" *ngIf="region.listDepartements">Départements associés : </p>
+    <app-departement *ngFor="let departement of region.listDepartements" [departement]="departement"></app-departement>
+  </div>
 </div>
